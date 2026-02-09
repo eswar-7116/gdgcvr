@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
@@ -12,84 +12,112 @@ const navLinks = [
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border/60">
-      <div className="container-wide flex items-center justify-between h-[4.25rem]">
+    <>
+      <nav
+        className={`fixed top-5 left-1/2 -translate-x-1/2 z-50 w-[95%] md:w-[90%] max-w-5xl transition-all duration-300 ${scrolled
+          ? "bg-white/95 backdrop-blur-xl border-black/5 shadow-[0_6px_0_0_rgba(0,0,0,0.08)] py-3"
+          : "bg-white/80 backdrop-blur-md border-black/5 shadow-[0_4px_0_0_rgba(0,0,0,0.05)] py-4"
+          } border rounded-full px-6 flex items-center justify-between`}
+      >
+        {/* Logo */}
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2.5 group">
-          <div className="flex gap-1">
-            <span className="w-2.5 h-2.5 rounded-full bg-google-blue transition-transform duration-200 group-hover:scale-110" />
-            <span className="w-2.5 h-2.5 rounded-full bg-google-red transition-transform duration-200 group-hover:scale-110 delay-75" />
-            <span className="w-2.5 h-2.5 rounded-full bg-google-yellow transition-transform duration-200 group-hover:scale-110 delay-100" />
-            <span className="w-2.5 h-2.5 rounded-full bg-google-green transition-transform duration-200 group-hover:scale-110 delay-150" />
+          <div className="h-10 w-10 flex items-center justify-center">
+            <svg
+              width="100%"
+              height="100%"
+              viewBox="-30 -30 160 160"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="transition-transform duration-300 group-hover:scale-110"
+            >
+              {/* Left Bracket */}
+              <path d="M35 25 L10 50 L35 75" stroke="black" strokeWidth="28" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M35 25 L10 50" stroke="#EA4335" strokeWidth="18" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M10 50 L35 75" stroke="#4285F4" strokeWidth="18" strokeLinecap="round" strokeLinejoin="round" />
+
+              {/* Right Bracket */}
+              <path d="M65 25 L90 50 L65 75" stroke="black" strokeWidth="28" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M65 25 L90 50" stroke="#34A853" strokeWidth="18" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M90 50 L65 75" stroke="#FBBC05" strokeWidth="18" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
           </div>
-          <span className="font-semibold text-foreground tracking-tight text-[0.9rem]">GDG Campus</span>
+          <span className="font-semibold text-foreground tracking-tight text-[1rem]">GDG Campus</span>
         </Link>
 
-        {/* Desktop Links */}
-        <div className="hidden md:flex items-center gap-9">
+        {/* Desktop Links (Centered) */}
+        <div className="hidden md:flex items-center gap-1 bg-secondary/30 p-1.5 rounded-full border border-black/5">
           {navLinks.map((link) => (
             <Link
               key={link.path}
               to={link.path}
-              className={`relative text-sm font-medium transition-colors duration-200 ${location.pathname === link.path
-                ? "text-foreground"
-                : "text-muted-foreground hover:text-foreground"
+              className={`relative px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${location.pathname === link.path
+                ? "bg-white text-foreground shadow-sm"
+                : "text-muted-foreground hover:text-foreground hover:bg-white/50"
                 }`}
             >
               {link.name}
-              {location.pathname === link.path && (
-                <motion.div
-                  layoutId="nav-indicator"
-                  className="absolute -bottom-1.5 left-0 right-0 h-[2px] bg-google-blue rounded-full"
-                  transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                />
-              )}
             </Link>
           ))}
         </div>
 
-        {/* Mobile Toggle */}
-        <button
-          className="md:hidden text-foreground"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="Toggle menu"
-        >
-          {mobileOpen ? <X size={22} /> : <Menu size={22} />}
-        </button>
-      </div>
+        {/* Right Side: CTA + Mobile Toggle */}
+        <div className="flex items-center gap-4">
 
-      {/* Mobile Menu */}
+
+          {/* Mobile Toggle */}
+          <button
+            className="md:hidden p-2 rounded-full hover:bg-secondary transition-colors text-foreground"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label="Toggle menu"
+          >
+            {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+      </nav>
+
+      {/* Mobile Menu Dropdown (Floating below nav) */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.25, ease: "easeOut" as const }}
-            className="md:hidden bg-background/95 backdrop-blur-xl border-b border-border overflow-hidden"
+            initial={{ opacity: 0, y: -20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -20, scale: 0.95 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            className="fixed top-28 left-1/2 -translate-x-1/2 z-40 w-[90%] max-w-sm bg-white rounded-3xl shadow-[0_8px_0_0_rgba(0,0,0,0.08)] border border-black/5 overflow-hidden md:hidden"
           >
-            <div className="container-wide py-6 flex flex-col gap-4">
+            <div className="p-3 flex flex-col gap-1">
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
                   to={link.path}
                   onClick={() => setMobileOpen(false)}
-                  className={`text-sm font-medium py-2 transition-colors duration-200 ${location.pathname === link.path
-                    ? "text-foreground"
-                    : "text-muted-foreground hover:text-foreground"
+                  className={`w-full text-center px-4 py-3 rounded-2xl text-base font-medium transition-all ${location.pathname === link.path
+                    ? "bg-secondary text-foreground"
+                    : "text-muted-foreground hover:bg-secondary/50 hover:text-foreground hover:pl-6"
                     }`}
                 >
                   {link.name}
                 </Link>
               ))}
+
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </>
   );
 };
 
