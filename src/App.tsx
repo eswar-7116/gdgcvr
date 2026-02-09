@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -7,6 +8,7 @@ import { useState, useEffect } from "react";
 import Index from "./pages/Index";
 import Team from "./pages/Team";
 import Events from "./pages/Events";
+import Calendar from "./pages/Calendar";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import NotFound from "./pages/NotFound";
@@ -39,6 +41,7 @@ const App = () => {
             <Route path="/" element={<Index />} />
             <Route path="/team" element={<Team />} />
             <Route path="/events" element={<Events />} />
+            <Route path="/calendar" element={<Calendar />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:id" element={<BlogPost />} />
             <Route path="*" element={<NotFound />} />
@@ -47,7 +50,6 @@ const App = () => {
       </TooltipProvider>
     </QueryClientProvider>
   );
-
 };
 
 export default App;

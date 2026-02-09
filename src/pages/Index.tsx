@@ -56,11 +56,26 @@ const Index = () => {
 
         <div className="container-narrow">
           <AnimatedSection>
-            <div className="flex items-center gap-2.5 mb-10">
-              <span className="w-3 h-3 rounded-full bg-google-blue" />
-              <span className="w-3 h-3 rounded-full bg-google-red" />
-              <span className="w-3 h-3 rounded-full bg-google-yellow" />
-              <span className="w-3 h-3 rounded-full bg-google-green" />
+            <div className="flex items-center gap-2.5 mb-8">
+              <div className="w-16 h-16">
+                <svg
+                  width="100%"
+                  height="100%"
+                  viewBox="-30 -30 160 160"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  {/* Left Bracket */}
+                  <path d="M35 25 L10 50 L35 75" stroke="black" strokeWidth="28" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M35 25 L10 50" stroke="#EA4335" strokeWidth="18" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M10 50 L35 75" stroke="#4285F4" strokeWidth="18" strokeLinecap="round" strokeLinejoin="round" />
+
+                  {/* Right Bracket */}
+                  <path d="M65 25 L90 50 L65 75" stroke="black" strokeWidth="28" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M65 25 L90 50" stroke="#34A853" strokeWidth="18" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M90 50 L65 75" stroke="#FBBC05" strokeWidth="18" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </div>
             </div>
           </AnimatedSection>
 
