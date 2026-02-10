@@ -54,7 +54,7 @@ const Navbar = () => {
               <path d="M90 50 L65 75" stroke="#FBBC05" strokeWidth="18" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </div>
-          <span className="font-semibold text-foreground tracking-tight text-[1rem]">GDG Campus</span>
+          <span className="font-semibold text-foreground tracking-tight text-[1rem]">GDG CVR</span>
         </Link>
 
         {/* Desktop Links (Centered) */}
