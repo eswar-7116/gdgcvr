@@ -4,11 +4,6 @@ import { Github, Instagram, Linkedin, Twitter, ArrowRight } from "lucide-react";
 const Footer = () => {
     const currentYear = new Date().getFullYear();
 
-    // 3D Extrusion Effect
-    const extrudedTextShadow = Array.from({ length: 16 })
-        .map((_, i) => `${i + 1}px ${i + 1}px 0 #E5E7EB`)
-        .join(", ");
-
     return (
         <footer className="bg-background border-t-2 border-black mt-20 overflow-hidden relative">
             <div className="w-full">
@@ -47,10 +42,10 @@ const Footer = () => {
                         </p>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-4">
                             {[
-                                { icon: Twitter, label: "Twitter", href: "#" },
-                                { icon: Instagram, label: "Instagram", href: "#" },
-                                { icon: Linkedin, label: "LinkedIn", href: "#" },
-                                { icon: Github, label: "GitHub", href: "#" },
+                                { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/company/gdsc-cvr/" },
+                                { icon: Github, label: "GitHub", href: "https://www.github.com/gdgcvr/" },
+                                { icon: Instagram, label: "Instagram", href: "https://www.instagram.com/gdgccvr/" },
+                                { icon: () => <img src="https://img.icons8.com/?size=100&id=fJp7hepMryiw&format=png&color=000000" className="h-7" />, label: "X", href: "https://x.com/gdsccvr" },
                             ].map(({ icon: Icon, label, href }) => (
                                 <a
                                     key={label}
