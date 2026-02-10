@@ -147,7 +147,7 @@ export const teamMembers = [
     name: "Agandla Rishitha",
     role: "Graphic Design Core Team Member",
     image: "src/assets/team/Rishitha.jpg",
-    linkedin: "",
+    linkedin: "https://www.linkedin.com/in/agandla-rishitha-1934b4325/",
   },
   {
     name: "M.SAICHARAN REDDY",
