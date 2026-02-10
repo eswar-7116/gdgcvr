@@ -112,12 +112,6 @@ const Team = () => {
                             {/* Main Card */}
                             <div className="relative h-full bg-white rounded-2xl rounded-tr-[2rem] overflow-hidden border-2 border-black/5 group-hover:border-black transition-all duration-300">
                               <div className="aspect-[4/4.5] relative">
-                                {/* Tech Corner Accent */}
-                                <div className={`absolute top-0 right-0 w-12 h-12 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300`}>
-                                  <div className={`absolute top-0 right-0 w-full h-full ${bgColor} opacity-20`}></div>
-                                  <div className={`w-2 h-2 ${bgColor} rounded-full`}></div>
-                                </div>
-
                                 <img
                                   src={member.image}
                                   alt={member.name}
