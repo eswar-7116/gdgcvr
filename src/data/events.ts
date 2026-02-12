@@ -7,6 +7,12 @@ import gcp from "@/assets/events/gcp.png";
 import web from "@/assets/events/web.jpg";
 import cyrrup from "@/assets/events/cyrrup.png";
 
+export const nextEvent = {
+  title: "Resume Building Session",
+  date: "February 13, 2026",
+  description: "Learn how to craft a perfect resume to crack top tech companies.",
+}
+
 export const allEvents = [
   {
     title: "Resume Building Session",
