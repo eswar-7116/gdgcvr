@@ -75,11 +75,7 @@ const Footer = () => {
                         </div>
                     </div>
 
-                    <div className="flex gap-8 text-sm text-muted-foreground font-medium">
-                        <a href="#" className="hover:text-foreground transition-colors">Privacy Policy</a>
-                        <a href="#" className="hover:text-foreground transition-colors">Terms of Service</a>
-                        <a href="#" className="hover:text-foreground transition-colors">Code of Conduct</a>
-                    </div>
+
                 </div>
             </div>
         </footer>
