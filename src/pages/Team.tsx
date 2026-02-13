@@ -121,18 +121,11 @@ const Team = () => {
         <div className="container-wide">
           <AnimatedSection>
             <div className="text-center mb-24">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-google-red mb-6">
-                Our Team
-              </p>
               <h1 className="heading-lg max-w-3xl mx-auto">
                 Meet the minds behind <br />
-                <motion.span
-                  className="text-transparent bg-clip-text bg-gradient-to-r from-google-blue via-google-red to-google-yellow bg-[length:200%_auto]"
-                  animate={{ backgroundPosition: ["0% 50%", "200% 50%"] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                >
+                <span className="text-black">
                   GDG On Campus
-                </motion.span>
+                </span>
               </h1>
             </div>
           </AnimatedSection>
@@ -189,7 +182,7 @@ const Team = () => {
                                 <img
                                   src={member.image}
                                   alt={member.name}
-                                  className="w-full h-full object-cover object-top transition-all duration-500 group-hover:scale-105"
+                                  className={`w-full h-full object-cover ${(member as any).objectPosition || "object-top"} transition-all duration-500 group-hover:scale-105`}
                                 />
 
                                 {/* Overlay */}

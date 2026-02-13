@@ -32,7 +32,7 @@ export const teamMembers = [
   {
     name: "NIMMAGADDA TRISHA",
     role: "AIML-DS Core Team Lead",
-    image: "src/assets/team/Trisha_Nimmagadda.jpg",
+    image: "src/assets/team/Trisha_Nimmagadda_v2.jpeg",
     linkedin: "https://linkedin.com/in/trisha-nimmagadda-a947522a5",
   },
   {
@@ -116,7 +116,7 @@ export const teamMembers = [
   {
     name: "Shaik Abubakar Siddiq",
     role: "AIML-DS Core Team Member",
-    image: "src/assets/team/Siddiq_Shaik.jpg",
+    image: "src/assets/team/Siddiq_Shaik_v2.jpg",
     linkedin: "https://linkedin.com/in/shaik-abubakar-siddiq-83a81432a/",
   },
   {
@@ -172,5 +172,6 @@ export const teamMembers = [
     role: "Photography Core Team Member",
     image: "src/assets/team/Ranabothu_Varshitha_Reddy.jpg",
     linkedin: "https://linkedin.com/in/ranabothu-varshitha-reddy-b883b52a6",
+    objectPosition: "object-bottom",
   },
 ];
