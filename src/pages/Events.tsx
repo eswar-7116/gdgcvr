@@ -1,24 +1,11 @@
 import { useState } from "react";
+import { ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import AnimatedSection from "@/components/AnimatedSection";
 import Layout from "@/components/Layout";
 import CalendarView from "@/components/CalendarView";
 import { allEvents } from "@/data/events";
-
-const colorBorder: Record<string, string> = {
-  "google-blue": "border-google-blue",
-  "google-red": "border-google-red",
-  "google-green": "border-google-green",
-  "google-yellow": "border-google-yellow",
-};
-
-const colorText: Record<string, string> = {
-  "google-blue": "group-hover:text-google-blue",
-  "google-red": "group-hover:text-google-red",
-  "google-green": "group-hover:text-google-green",
-  "google-yellow": "group-hover:text-google-yellow",
-};
 
 const Events = () => {
   const [filter, setFilter] = useState<"all" | "upcoming" | "past">("all");
@@ -160,11 +147,10 @@ const Events = () => {
                 <button
                   key={f}
                   onClick={() => setFilter(f)}
-                  className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-200 ${
-                    filter === f
-                      ? "bg-foreground text-background shadow-lift"
-                      : "bg-secondary text-muted-foreground hover:text-foreground hover:bg-secondary/80"
-                  }`}
+                  className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-200 ${filter === f
+                    ? "bg-foreground text-background shadow-lift"
+                    : "bg-secondary text-muted-foreground hover:text-foreground hover:bg-secondary/80"
+                    }`}
                 >
                   {f.charAt(0).toUpperCase() + f.slice(1)}
                 </button>
@@ -172,36 +158,96 @@ const Events = () => {
             </div>
           </AnimatedSection>
 
-          <div className="grid md:grid-cols-3 gap-8 mt-10">
-            {filtered.map((event, i) => (
-              <AnimatedSection key={event.title + event.date} delay={0.06 * i}>
-                <div
-                  className={`group border-t-2 ${colorBorder[event.color]} pt-8`}
-                >
-                  {event.image && (
-                    <div className="aspect-[16/10] rounded-xl overflow-hidden mb-7 bg-muted shadow-sm group-hover:shadow-lift transition-shadow duration-300">
-                      <img
-                        src={event.image}
-                        alt={event.title}
-                        className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out"
-                        loading="lazy"
-                      />
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
+            {filtered.map((event, i) => {
+              const bgColors = {
+                "google-blue": "bg-google-blue",
+                "google-red": "bg-google-red",
+                "google-green": "bg-google-green",
+                "google-yellow": "bg-google-yellow",
+              };
+
+              const borderColors = {
+                "google-blue": "border-google-blue",
+                "google-red": "border-google-red",
+                "google-green": "border-google-green",
+                "google-yellow": "border-google-yellow",
+              };
+
+              const textColors = {
+                "google-blue": "text-google-blue",
+                "google-red": "text-google-red",
+                "google-green": "text-google-green",
+                "google-yellow": "text-google-yellow",
+              };
+
+              const bgColor = bgColors[event.color] || "bg-google-blue";
+              const borderColor = borderColors[event.color] || "border-google-blue";
+              const textColor = textColors[event.color] || "text-google-blue";
+
+              return (
+                <AnimatedSection key={event.title + event.date} delay={0.06 * i}>
+                  <div className="group relative h-full">
+                    {/* Fun Offset Shadow Layer - appears on hover */}
+                    <div className={`absolute inset-0 rounded-3xl translate-x-2 translate-y-2 ${bgColor} opacity-0 group-hover:opacity-100 transition-all duration-300`}></div>
+
+                    {/* Main Card Container */}
+                    <div className="relative h-full flex flex-col bg-white rounded-3xl border-2 border-black/5 group-hover:border-black transition-all duration-300 group-hover:-translate-y-1 group-hover:-translate-x-1 overflow-hidden">
+
+                      {/* Integrated Image Header */}
+                      <div className="relative h-48 w-full overflow-hidden border-b-2 border-black/5 group-hover:border-black/10 transition-colors">
+                        {event.image ? (
+                          <img
+                            src={event.image}
+                            alt={event.title}
+                            className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110 group-hover:rotate-1"
+                            loading="lazy"
+                          />
+                        ) : (
+                          <div className={`w-full h-full ${bgColor} opacity-10 flex items-center justify-center`}>
+                            <span className="text-4xl font-black opacity-20">GDG</span>
+                          </div>
+                        )}
+
+                        {/* Sticker Date Badge */}
+                        <div className="absolute top-3 right-3 transform rotate-3 group-hover:rotate-0 transition-transform duration-300">
+                          <span className={`inline-block px-3 py-1 bg-white border-2 border-black rounded-lg text-xs font-black uppercase tracking-wider shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]`}>
+                            {event.date}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Card Content */}
+                      <div className="flex flex-col flex-grow p-6">
+                        <div className="mb-2">
+                          <span className={`inline-block text-[10px] font-black uppercase tracking-[0.2em] ${textColor}`}>
+                            {event.upcoming ? 'UPCOMING' : 'PAST EVENT'}
+                          </span>
+                        </div>
+
+                        <h3 className="text-2xl font-bold text-black mb-3 leading-tight tracking-tight group-hover:underline decoration-2 underline-offset-2 transition-all">
+                          {event.title}
+                        </h3>
+
+                        <p className="text-sm font-medium text-neutral-500 leading-relaxed mb-6 line-clamp-3">
+                          {event.description}
+                        </p>
+
+                        {/* Bottom Action Area */}
+                        <div className="mt-auto pt-4 border-t-2 border-black/5 border-dashed flex items-center justify-between group-hover:border-black/20 transition-colors">
+                          <span className="text-xs font-bold text-black uppercase tracking-wide">
+                            View Details
+                          </span>
+                          <div className={`w-8 h-8 rounded-full border-2 border-black flex items-center justify-center bg-white shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all duration-300`}>
+                            <ArrowUpRight className="w-4 h-4 text-black" strokeWidth={3} />
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                  )}
-                  <p className="text-xs text-muted-foreground mb-3 tracking-wide uppercase">
-                    {event.date}
-                  </p>
-                  <h3
-                    className={`text-xl font-semibold text-foreground mb-2 ${colorText[event.color]} transition-colors duration-200`}
-                  >
-                    {event.title}
-                  </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    {event.description}
-                  </p>
-                </div>
-              </AnimatedSection>
-            ))}
+                  </div>
+                </AnimatedSection>
+              );
+            })}
           </div>
         </div>
       </section>
