@@ -8,19 +8,28 @@ import web from "@/assets/events/web.jpg";
 import cyrrup from "@/assets/events/cyrrup.png";
 
 export const nextEvent = {
-  title: "Resume Building Session",
-  date: "February 13, 2026",
-  description: "Learn how to craft a perfect resume to crack top tech companies.",
+  title: "Mock Placement Drive",
+  date: "Feb 20-21, 2026",
+  description: "Simulating real-world placement scenarios to prepare you for success.",
 }
 
 export const allEvents = [
+  {
+    title: "Mock Placement Drive",
+    date: "Feb 20-21, 2026",
+    description:
+      "Simulating real-world placement scenarios to prepare you for success.",
+    image: event2,
+    upcoming: true,
+    color: "google-blue",
+  },
   {
     title: "Resume Building Session",
     date: "February 13, 2026",
     description:
       "Learn how to craft a perfect resume to crack top tech companies.",
     image: event1,
-    upcoming: true,
+    upcoming: false,
     color: "google-blue",
   },
   {
