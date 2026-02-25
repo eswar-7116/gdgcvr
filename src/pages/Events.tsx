@@ -1,14 +1,22 @@
 import { useState } from "react";
-import { ArrowUpRight } from "lucide-react";
-import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { ArrowUpRight, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import AnimatedSection from "@/components/AnimatedSection";
 import Layout from "@/components/Layout";
 import CalendarView from "@/components/CalendarView";
 import { allEvents } from "@/data/events";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 const Events = () => {
   const [filter, setFilter] = useState<"all" | "upcoming" | "past">("all");
+  const [selectedEvent, setSelectedEvent] = useState<typeof allEvents[0] | null>(null);
 
   const filtered = allEvents.filter((e) => {
     if (filter === "upcoming") return e.upcoming;
@@ -107,7 +115,10 @@ const Events = () => {
               return (
                 <AnimatedSection key={event.title + event.date} delay={0.1}>
                   <div className={`w-full lg:max-w-5xl ${isEven ? 'self-start mr-auto' : 'self-end ml-auto'}`}>
-                    <div className="group relative w-full perspective-1000">
+                    <div
+                      className="group relative w-full perspective-1000 cursor-pointer"
+                      onClick={() => setSelectedEvent(event as any)}
+                    >
                       <div className="relative flex flex-col md:flex-row h-auto md:h-64 rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 bg-white border border-black/5 hover:-translate-y-1">
 
                         {/* LEFT STUB (Date & Info) */}
@@ -174,7 +185,7 @@ const Events = () => {
                                 ))}
                               </div>
 
-                              <div className="flex items-center gap-2 group/btn cursor-pointer">
+                              <div className="flex items-center gap-2 group/btn">
                                 <span className="text-xs font-bold text-black uppercase tracking-wide group-hover/btn:underline decoration-2 underline-offset-2">
                                   Details
                                 </span>
@@ -212,6 +223,98 @@ const Events = () => {
           </div>
         </div>
       </section>
+
+      {/* Event Details Dialog */}
+      <Dialog open={!!selectedEvent} onOpenChange={(open) => !open && setSelectedEvent(null)}>
+        <DialogContent className="max-w-4xl p-0 overflow-hidden border-none bg-white rounded-3xl shadow-2xl">
+          <ScrollArea className="max-h-[85vh]">
+            {selectedEvent && (
+              <div className="relative">
+                {/* Banner Image */}
+                <div className="h-64 md:h-80 w-full relative">
+                  <img
+                    src={selectedEvent.image}
+                    alt={selectedEvent.title}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+
+                  <button
+                    onClick={() => setSelectedEvent(null)}
+                    className="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white hover:bg-white/40 transition-all z-50"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+
+                  <div className="absolute bottom-6 left-8 right-8 text-white">
+                    <div className="flex items-center gap-3 mb-2">
+                      <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-white text-black`}>
+                        {selectedEvent.upcoming ? 'Upcoming' : 'Past Event'}
+                      </span>
+                      <span className="text-sm font-bold opacity-80">{selectedEvent.date}</span>
+                    </div>
+                    <DialogTitle className="text-3xl md:text-4xl font-black mb-0 text-white">
+                      {selectedEvent.title}
+                    </DialogTitle>
+                  </div>
+                </div>
+
+                <div className="p-8 md:p-10 bg-white">
+                  {/* Content Grid */}
+                  <div className="flex flex-col gap-10">
+                    {/* Description Section */}
+                    <div className="space-y-4">
+                      <h4 className="text-xl font-bold text-black border-l-4 border-google-blue pl-4">About the Event</h4>
+                      <DialogDescription className="text-lg text-neutral-600 leading-relaxed font-medium">
+                        {(selectedEvent as any).descriptionLong || selectedEvent.description}
+                      </DialogDescription>
+                    </div>
+
+                    {/* Gallery Section */}
+                    {(selectedEvent as any).gallery && (selectedEvent as any).gallery.length > 0 && (
+                      <div className="space-y-6">
+                        <div className="flex items-center justify-between">
+                          <h4 className="text-xl font-bold text-black border-l-4 border-google-green pl-4">Event Gallery</h4>
+                          <span className="text-xs font-bold text-neutral-400 uppercase tracking-widest">
+                            {(selectedEvent as any).gallery.length} Images
+                          </span>
+                        </div>
+
+                        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                          {(selectedEvent as any).gallery.map((img: string, idx: number) => (
+                            <motion.div
+                              key={idx}
+                              whileHover={{ scale: 1.02 }}
+                              className={`relative rounded-2xl overflow-hidden cursor-zoom-in h-48 border border-black/5 ${idx === 0 ? 'col-span-2 md:col-span-2 h-64 md:h-80' : 'h-40 md:h-full'
+                                }`}
+                            >
+                              <img
+                                src={img}
+                                alt={`Gallery ${idx}`}
+                                className="w-full h-full object-cover hover:scale-110 transition-transform duration-700"
+                              />
+                            </motion.div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Footer / Call to Action */}
+                    {selectedEvent.upcoming && (
+                      <div className="bg-neutral-50 rounded-2xl p-6 border border-neutral-100 flex flex-col items-center justify-center text-center gap-4">
+                        <div>
+                          <h5 className="font-bold text-lg mb-1">Coming soon to CVR Campus</h5>
+                          <p className="text-neutral-500 text-sm">Follow our socials for more updates on registration.</p>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
+          </ScrollArea>
+        </DialogContent>
+      </Dialog>
     </Layout>
   );
 };
