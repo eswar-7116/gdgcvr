@@ -38,9 +38,7 @@ const Footer = () => {
               <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-4 leading-[1.1] text-foreground">
                 Shape the future of tech with{" "}
                 <motion.span
-                  className="text-transparent bg-clip-text bg-gradient-to-r from-google-blue via-google-red to-google-yellow bg-[length:200%_auto] inline-block"
-                  animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
-                  transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+                  className="text-black inline-block font-black"
                 >
                   GDG Campus
                 </motion.span>.

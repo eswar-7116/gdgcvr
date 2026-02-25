@@ -153,7 +153,7 @@ const colorStyles = {
 
 const CalendarView = ({ isPreview = false }: { isPreview?: boolean }) => {
     const [currentDate, setCurrentDate] = useState(new Date(2026, 1, 12));
-    const [view, setView] = useState<ViewType>("Week");
+    const [view, setView] = useState<ViewType>("Month");
     const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 

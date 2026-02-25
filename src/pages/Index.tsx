@@ -220,13 +220,13 @@ const Index = () => {
               >
                 <Link
                   to="/events"
-                  className="h-full w-full bg-google-green rounded-[2rem] p-5 flex flex-col justify-center items-center text-white relative overflow-hidden group"
+                  className="h-full w-full bg-[#FED7AA] hover:bg-[#FDBA74] rounded-[2rem] p-5 flex flex-col justify-center items-center text-[#7C2D12] relative overflow-hidden group shadow-sm hover:shadow-md transition-all"
                 >
-                  <div className="absolute inset-0 bg-black/10 scale-y-0 group-hover:scale-y-100 transition-transform origin-bottom duration-300"></div>
-                  <span className="relative z-10 font-bold text-lg">
+                  <div className="absolute inset-0 bg-[#FDBA74] scale-y-0 group-hover:scale-y-100 transition-transform origin-bottom duration-300"></div>
+                  <span className="relative z-10 font-bold text-lg tracking-tight">
                     All Events
                   </span>
-                  <ArrowRight className="relative z-10 w-5 h-5 mt-1 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="relative z-10 w-5 h-5 mt-1 text-[#7C2D12] group-hover:translate-x-1 transition-transform" />
                 </Link>
               </motion.div>
 
@@ -239,11 +239,11 @@ const Index = () => {
               >
                 <Link
                   to="/team"
-                  className="h-full w-full bg-google-red rounded-[2rem] p-5 flex flex-col justify-center items-center text-white relative overflow-hidden group"
+                  className="h-full w-full bg-[#CEEAD6] hover:bg-[#B7E1CD] rounded-[2rem] p-5 flex flex-col justify-center items-center text-[#0D652D] relative overflow-hidden group transition-all"
                 >
-                  <div className="absolute inset-0 bg-black/10 scale-y-0 group-hover:scale-y-100 transition-transform origin-bottom duration-300"></div>
-                  <span className="relative z-10 font-bold text-lg">Team</span>
-                  <ArrowRight className="relative z-10 w-5 h-5 mt-1 group-hover:translate-x-1 transition-transform" />
+                  <div className="absolute inset-0 bg-[#B7E1CD] scale-y-0 group-hover:scale-y-100 transition-transform origin-bottom duration-300"></div>
+                  <span className="relative z-10 font-bold text-lg tracking-tight">Team</span>
+                  <ArrowRight className="relative z-10 w-5 h-5 mt-1 text-[#0D652D] group-hover:translate-x-1 transition-transform" />
                 </Link>
               </motion.div>
             </div>
