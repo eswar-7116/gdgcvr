@@ -2,7 +2,7 @@ export const teamMembers = [
   {
     name: "Vijaya Mair",
     role: "Dean, Career Development Centre",
-    image: "src/assets/team/vijaya_mair.jpg",
+    image: "vijaya_mam.jpg",
     linkedin: "https://linkedin.com/in/vijayamair/",
   },
   {
