@@ -88,6 +88,38 @@ const generateSessionEvents = (): Event[] => {
         tags: ["Career", "Resume"]
     });
 
+    // Special Event: Mock Placement Drive (Day 1)
+    const placementDate1 = new Date(2026, 1, 20); // Feb 20
+    placementDate1.setHours(9, 0, 0, 0); // 9 AM
+    const placementEnd1 = new Date(placementDate1);
+    placementEnd1.setHours(16, 0, 0, 0); // 4 PM
+
+    events.push({
+        id: idCounter++,
+        title: "Mock Placement Drive",
+        start: placementDate1,
+        end: placementEnd1,
+        timeString: "09:00 AM - 04:00 PM",
+        color: "blue",
+        tags: ["Career", "Placement"]
+    });
+
+    // Special Event: Mock Placement Drive (Day 2)
+    const placementDate2 = new Date(2026, 1, 21); // Feb 21
+    placementDate2.setHours(9, 0, 0, 0); // 9 AM
+    const placementEnd2 = new Date(placementDate2);
+    placementEnd2.setHours(16, 0, 0, 0); // 4 PM
+
+    events.push({
+        id: idCounter++,
+        title: "Mock Placement Drive",
+        start: placementDate2,
+        end: placementEnd2,
+        timeString: "09:00 AM - 04:00 PM",
+        color: "blue",
+        tags: ["Career", "Placement"]
+    });
+
     while (currentDate <= endDate) {
         const day = currentDate.getDay(); // 0=Sun, 1=Mon, ..., 6=Sat
         const isResumeDay = currentDate.getDate() === 13 && currentDate.getMonth() === 1; // Feb 13
