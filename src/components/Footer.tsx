@@ -1,5 +1,4 @@
 import { Github, Instagram, Linkedin, ArrowRight } from "lucide-react";
-import logo from "@/assets/logo.png";
 import { motion } from "framer-motion";
 import { DoodleDots, DoodleCircle, DoodleSpark } from "@/components/DoodleAccents";
 
@@ -123,7 +122,7 @@ const Footer = () => {
             transition={{ duration: 0.8, ease: "easeInOut" }}
             className="w-10 h-10 bg-white rounded-xl border border-black/5 flex items-center justify-center shadow-sm cursor-pointer"
           >
-            <img src={logo} className="w-6 h-6 object-contain" alt="GDG Logo" />
+            <img src={"/logo.png"} className="w-6 h-6 object-contain" alt="GDG Logo" />
           </motion.div>
 
           <div className="flex flex-col">
