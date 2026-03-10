@@ -2,7 +2,7 @@ import React from "react";
 
 const Loader = () => {
     return (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-background/90 backdrop-blur-sm animate-fade-out">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-background backdrop-blur-sm animate-fade-out">
             <div className="relative w-80 h-80 md:w-96 md:h-96 flex items-center justify-center animate-breathe">
                 {/* --- 1. Subtle Rising Particles (Antigravity Ambience) --- */}
                 <div className="absolute inset-0 z-0">
