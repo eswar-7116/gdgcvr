@@ -36,20 +36,23 @@ const AppRoutes = () => {
     return () => clearTimeout(timer);
   }, [loading]);
 
-  if (loading) {
-    return <Loader />;
-  }
-
   return (
-    <Routes>
-      <Route path="/" element={<Index />} />
-      <Route path="/team" element={<Team />} />
-      <Route path="/events" element={<Events />} />
-      <Route path="/calendar" element={<Calendar />} />
-      <Route path="/blog" element={<Blog />} />
-      <Route path="/blog/:id" element={<BlogPost />} />
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+    <>
+      {loading && (
+        <div style={{ position: 'fixed', inset: 0, zIndex: 9999 }}>
+          <Loader />
+        </div>
+      )}
+      <Routes>
+        <Route path="/" element={<Index />} />
+        <Route path="/team" element={<Team />} />
+        <Route path="/events" element={<Events />} />
+        <Route path="/calendar" element={<Calendar />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:id" element={<BlogPost />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </>
   );
 };
 
