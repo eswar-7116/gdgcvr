@@ -15,18 +15,6 @@ export const allEvents = [
     link: "https://code-nyx.tech"
   },
   {
-    title: "AIoT & Embedded Systems Workshop",
-    date: "March 16, 2026",
-    description:
-      "Hands-on workshop introducing the fundamentals of Internet of Things and embedded systems.",
-    descriptionLong:
-      "The AIoT & Embedded Systems Workshop is designed to help students understand the fundamentals of Internet of Things, embedded systems, and smart device communication. Participants will get hands-on experience with sensors, microcontrollers, and real-time data processing while building small IoT-based prototypes. This workshop will help students gain practical exposure to how connected devices work in modern smart systems.",
-    image: "/events/iot_workshop.png",
-    gallery: ["/events/iot_workshop.jpeg", "/events/iot_workshop2.jpeg"],
-    upcoming: true,
-    color: "google-green",
-  },
-  {
     title: "EmbeddedX",
     date: "March 31, 2026",
     description:
@@ -37,6 +25,18 @@ export const allEvents = [
     gallery: ["/events/iot_expo.jpeg", "/events/iot_expo2.jpeg"],
     upcoming: true,
     color: "google-red",
+  },
+  {
+    title: "AIoT & Embedded Systems Workshop",
+    date: "March 16, 2026",
+    description:
+      "Hands-on workshop introducing the fundamentals of Internet of Things and embedded systems.",
+    descriptionLong:
+      "The AIoT & Embedded Systems Workshop is designed to help students understand the fundamentals of Internet of Things, embedded systems, and smart device communication. Participants will get hands-on experience with sensors, microcontrollers, and real-time data processing while building small IoT-based prototypes. This workshop will help students gain practical exposure to how connected devices work in modern smart systems.",
+    image: "/events/iot_workshop.png",
+    gallery: ["/events/iot_workshop.jpeg", "/events/iot_workshop2.jpeg"],
+    upcoming: true,
+    color: "google-green",
   },
   {
     title: "Mock Placement Drive",
