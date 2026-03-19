@@ -1,26 +1,55 @@
-# Logs
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# build / production
+/build
+/dist
+/dist-ssr
+/.next
+/out
+
+# testing
+/coverage
+
+# environment files
+.env*
+*.local
+
+# logs / debug
 logs
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+.pnpm-debug.log*
 lerna-debug.log*
 
-bun.lockb
-node_modules
-dist
-dist-ssr
-*.local
+# vercel
+.vercel
 
-# Editor directories and files
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# IDE / editor
 .vscode/*
 !.vscode/extensions.json
 .idea
-.DS_Store
+.cursor
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
-.vercel
+
+# system files
+.DS_Store
+*.pem

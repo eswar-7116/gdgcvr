@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://gdg.cvr.ac.in/sitemap.xml
