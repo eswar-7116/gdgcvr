@@ -59,6 +59,7 @@ const Navbar = () => {
             <Link
               key={link.path}
               href={link.path}
+              aria-current={pathname === link.path ? "page" : undefined}
               className={`relative px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                 pathname === link.path
                   ? "bg-white text-foreground shadow-sm"
@@ -76,7 +77,9 @@ const Navbar = () => {
           <button
             className="md:hidden p-2 rounded-full hover:bg-secondary transition-colors text-foreground"
             onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="Toggle menu"
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-menu"
           >
             {mobileOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -91,6 +94,7 @@ const Navbar = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
+            id="mobile-menu"
             className="fixed top-24 inset-x-4 z-[100] max-w-sm mx-auto bg-white/95 backdrop-blur-xl rounded-2xl shadow-[0_20px_40px_rgba(0,0,0,0.1)] border border-black/5 overflow-hidden md:hidden"
           >
             <div className="p-2 flex flex-col gap-1.5">
@@ -99,6 +103,7 @@ const Navbar = () => {
                   key={link.path}
                   href={link.path}
                   onClick={() => setMobileOpen(false)}
+                  aria-current={pathname === link.path ? "page" : undefined}
                   className={`flex items-center justify-center w-full px-4 py-3 rounded-xl text-base font-medium transition-all duration-200 ${
                     pathname === link.path
                       ? "bg-secondary text-foreground shadow-sm"

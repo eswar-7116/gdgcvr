@@ -16,9 +16,10 @@ export default function InitialLoader() {
   if (!loading) return null;
 
   return (
-    <div className="initial-loader">
+    <div className="initial-loader" role="status" aria-busy="true">
+      <span className="sr-only">Loading GDG CVR Website...</span>
       <div className="loader-container">
-        <div className="particles">
+        <div className="particles" aria-hidden="true">
           <div
             className="particle"
             style={{
@@ -58,6 +59,7 @@ export default function InitialLoader() {
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             style={{ overflow: "visible" }}
+            aria-hidden="true"
           >
             <path
               d="M35 38 L15 50 L35 62"

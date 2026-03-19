@@ -19,6 +19,7 @@ const Footer = () => {
         animate={{ y: [0, -10, 0], rotate: [0, 5, 0] }}
         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
         className="absolute top-10 right-10 md:right-32 opacity-20 pointer-events-none"
+        aria-hidden="true"
       >
         <DoodleDots className="w-24 h-24 text-google-yellow" />
       </motion.div>
@@ -27,6 +28,7 @@ const Footer = () => {
         animate={{ opacity: [0.3, 0.6, 0.3], scale: [1, 1.2, 1] }}
         transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
         className="absolute top-1/2 left-1/4 opacity-20 pointer-events-none"
+        aria-hidden="true"
       >
         <DoodleSpark className="w-12 h-12 text-google-red" />
       </motion.div>
@@ -120,6 +122,7 @@ const Footer = () => {
                 <a
                   key={label}
                   href={href}
+                  aria-label={`Follow us on ${label}`}
                   className="flex items-center gap-3 group p-2 hover:bg-secondary/50 rounded-lg transition-colors"
                 >
                   <motion.div
@@ -147,6 +150,7 @@ const Footer = () => {
             whileHover={{ rotate: 360 }}
             transition={{ duration: 0.8, ease: "easeInOut" }}
             className="w-10 h-10 bg-white rounded-xl border border-black/5 flex items-center justify-center shadow-sm cursor-pointer relative"
+            aria-hidden="true"
           >
             <Image
               src="/logo.png"

@@ -79,12 +79,17 @@ const Events = () => {
 
           {/* Filter */}
           <AnimatedSection delay={0.15}>
-            <div className="flex justify-center mb-16">
+            <aside
+              className="flex justify-center mb-16"
+              aria-label="Event filter"
+            >
               <div className="inline-flex gap-2 bg-white p-1.5 rounded-full border border-black/5 shadow-md">
                 {(["all", "upcoming", "past"] as const).map((f) => (
                   <button
                     key={f}
                     onClick={() => setFilter(f)}
+                    aria-selected={filter === f}
+                    role="tab"
                     className={`px-8 py-3 rounded-full text-base font-bold uppercase tracking-wider transition-all duration-300 ${
                       filter === f
                         ? "bg-black text-white shadow-lg transform scale-105"
@@ -95,7 +100,7 @@ const Events = () => {
                   </button>
                 ))}
               </div>
-            </div>
+            </aside>
           </AnimatedSection>
 
           {/* PREMIUM TICKET LAYOUT - ZIG ZAG */}
@@ -128,9 +133,10 @@ const Events = () => {
                   <div
                     className={`w-full lg:max-w-5xl ${isEven ? "self-start mr-auto" : "self-end ml-auto"}`}
                   >
-                    <div
+                    <article
                       className="group relative w-full perspective-1000 cursor-pointer"
                       onClick={() => setSelectedEvent(event as any)}
+                      aria-labelledby={`event-title-${i}`}
                     >
                       <div className="relative flex flex-col md:flex-row h-auto md:h-64 rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 bg-white border border-black/5 hover:-translate-y-1">
                         {/* LEFT STUB (Date & Info) */}
@@ -150,9 +156,9 @@ const Events = () => {
                           {/* Full Date Content */}
                           <div className="relative z-10 text-center flex md:flex-col items-center justify-center gap-2 w-full">
                             {/* Display full date properly */}
-                            <span className="text-2xl md:text-3xl font-black tracking-tight text-center leading-tight">
+                            <time className="text-2xl md:text-3xl font-black tracking-tight text-center leading-tight">
                               {event.date}
-                            </span>
+                            </time>
                             <div className="w-12 h-1 bg-white/30 rounded-full my-2 hidden md:block"></div>
                             <span className="text-xs font-bold uppercase tracking-widest opacity-80 hidden md:block">
                               Official Event
@@ -192,7 +198,10 @@ const Events = () => {
                                   {event.upcoming ? "Upcoming" : "Past Event"}
                                 </span>
                               </div>
-                              <h3 className="text-2xl md:text-3xl font-bold text-black mb-3 leading-tight group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-black group-hover:to-neutral-500 transition-all">
+                              <h3
+                                id={`event-title-${i}`}
+                                className="text-2xl md:text-3xl font-bold text-black mb-3 leading-tight group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-black group-hover:to-neutral-500 transition-all"
+                              >
                                 {event.title}
                               </h3>
                               <p className="text-neutral-500 font-medium line-clamp-2 md:line-clamp-3 mb-6">
@@ -229,7 +238,7 @@ const Events = () => {
                             {event.image ? (
                               <Image
                                 src={event.image}
-                                alt={event.title}
+                                alt={`Event poster for ${event.title}`}
                                 fill
                                 sizes="(max-width: 768px) 100vw, 256px"
                                 className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-out group-hover:scale-110"
@@ -248,7 +257,7 @@ const Events = () => {
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </article>
                   </div>
                 </AnimatedSection>
               );
@@ -270,7 +279,7 @@ const Events = () => {
                 <div className="h-64 md:h-80 w-full relative">
                   <Image
                     src={selectedEvent.image}
-                    alt={selectedEvent.title}
+                    alt={`Event banner for ${selectedEvent.title}`}
                     fill
                     sizes="(max-width: 896px) 100vw, 896px"
                     className="object-cover"
@@ -291,9 +300,9 @@ const Events = () => {
                       >
                         {selectedEvent.upcoming ? "Upcoming" : "Past Event"}
                       </span>
-                      <span className="text-sm font-bold opacity-80">
+                      <time className="text-sm font-bold opacity-80">
                         {selectedEvent.date}
-                      </span>
+                      </time>
                     </div>
                     <DialogTitle className="text-3xl md:text-4xl font-black mb-0 text-white">
                       {selectedEvent.title}
@@ -355,7 +364,7 @@ const Events = () => {
                                 >
                                   <Image
                                     src={img}
-                                    alt={`Gallery ${idx}`}
+                                    alt={`Gallery image ${idx + 1} for ${selectedEvent.title}`}
                                     fill
                                     sizes="(max-width: 768px) 50vw, 33vw"
                                     className="object-cover hover:scale-110 transition-transform duration-700"

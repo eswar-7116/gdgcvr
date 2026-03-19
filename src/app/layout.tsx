@@ -24,6 +24,9 @@ export const metadata: Metadata = {
   ],
   creator: "GDG on Campus CVR College of Engineering",
   metadataBase: new URL("https://gdg.cvr.ac.in/"),
+  alternates: {
+    canonical: "/",
+  },
   icons: "https://gdg.cvr.ac.in/favicon.ico",
   keywords: [
     "GDG on Campus CVR College of Engineering",
@@ -36,26 +39,33 @@ export const metadata: Metadata = {
     "GDG Team",
   ],
   openGraph: {
-    title: "GDGC CVRCOE",
+    title: "GDG on Campus CVR College of Engineering",
     description:
-      "The official website of GDG on Campus CVR College of Engineering",
+      "Empowering the next generation of developers at CVR College of Engineering.",
     type: "website",
     url: "https://gdg.cvr.ac.in/",
     siteName: "GDG on Campus CVR College of Engineering",
     locale: "en_IN",
-    images: [{ url: "https://gdg.cvr.ac.in/opengraph-image" }],
+    images: [{ url: "/opengraph-image" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "GDGC CVRCOE",
+    title: "GDG on Campus CVR College of Engineering",
     description:
-      "The official website of GDG on Campus CVR College of Engineering",
+      "Empowering the next generation of developers at CVR College of Engineering.",
     creator: "@gdsccvr",
-    images: ["https://gdg.cvr.ac.in/opengraph-image"],
+    images: ["/opengraph-image"],
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
 };
 

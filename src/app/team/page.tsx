@@ -288,11 +288,14 @@ const Team = () => {
                               ></div>
 
                               {/* Main Card */}
-                              <div className="relative h-full w-full bg-white rounded-2xl rounded-tr-[1.5rem] md:rounded-tr-[2rem] overflow-hidden border-2 border-black/5 group-hover:border-black transition-all duration-300">
+                              <article
+                                className="relative h-full w-full bg-white rounded-2xl rounded-tr-[1.5rem] md:rounded-tr-[2rem] overflow-hidden border-2 border-black/5 group-hover:border-black transition-all duration-300"
+                                aria-labelledby={`member-name-${i}`}
+                              >
                                 <div className="aspect-[3/4] md:aspect-[4/4.5] relative w-full">
                                   <Image
                                     src={member.image}
-                                    alt={member.name}
+                                    alt={`Profile photo of ${member.name} - ${member.role}`}
                                     fill
                                     sizes="(max-width: 768px) 50vw, 25vw"
                                     className={`object-cover ${(member as any).objectPosition || "object-top"} transition-all duration-500 group-hover:scale-105`}
@@ -302,7 +305,10 @@ const Team = () => {
                                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-60 group-hover:opacity-90 transition-opacity duration-300"></div>
 
                                   <div className="absolute bottom-0 left-0 right-0 p-2 md:p-4 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                                    <h3 className="text-white font-bold text-sm md:text-lg leading-tight mb-0.5 md:mb-1 drop-shadow-md truncate">
+                                    <h3
+                                      id={`member-name-${i}`}
+                                      className="text-white font-bold text-sm md:text-lg leading-tight mb-0.5 md:mb-1 drop-shadow-md truncate"
+                                    >
                                       {member.name}
                                     </h3>
                                     <div className="flex items-center justify-between border-t border-white/20 pt-1 md:pt-2">
@@ -320,7 +326,7 @@ const Team = () => {
                                     </div>
                                   </div>
                                 </div>
-                              </div>
+                              </article>
                             </div>
                           </AnimatedSection>
                         );

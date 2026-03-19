@@ -42,9 +42,18 @@ const bgColors: Record<string, string> = {
 const About = () => {
   return (
     <section className="pt-24 pb-24 border-t border-border relative">
-      <DoodleSquiggle className="absolute top-20 left-1/3 w-32 opacity-8 text-google-green" />
-      <DoodleDots className="absolute bottom-24 right-[8%] w-16 h-16 opacity-8 text-google-yellow" />
-      <DoodleLine className="absolute top-1/2 right-[20%] w-24 opacity-8 text-google-red" />
+      <DoodleSquiggle
+        className="absolute top-20 left-1/3 w-32 opacity-8 text-google-green"
+        aria-hidden="true"
+      />
+      <DoodleDots
+        className="absolute bottom-24 right-[8%] w-16 h-16 opacity-8 text-google-yellow"
+        aria-hidden="true"
+      />
+      <DoodleLine
+        className="absolute top-1/2 right-[20%] w-24 opacity-8 text-google-red"
+        aria-hidden="true"
+      />
 
       <div className="container-narrow">
         <AnimatedSection>
@@ -69,9 +78,12 @@ const About = () => {
         <div className="mt-24 grid md:grid-cols-3 gap-8">
           {focusPoints.map((point, i) => (
             <AnimatedSection key={point.title} delay={0.1 * i}>
-              <div className="group relative h-full p-8 rounded-[2.5rem] bg-secondary/30 hover:bg-white border border-transparent hover:border-black/5 transition-all duration-500 hover:shadow-[0_8px_40px_rgba(0,0,0,0.06)] overflow-hidden">
+              <article className="group relative h-full p-8 rounded-[2.5rem] bg-secondary/30 hover:bg-white border border-transparent hover:border-black/5 transition-all duration-500 hover:shadow-[0_8px_40px_rgba(0,0,0,0.06)] overflow-hidden">
                 {/* Large Number Watermark */}
-                <span className="absolute -right-2 -top-2 text-[8rem] leading-none font-bold text-black/[0.02] group-hover:text-black/[0.04] transition-colors select-none pointer-events-none">
+                <span
+                  className="absolute -right-2 -top-2 text-[8rem] leading-none font-bold text-black/[0.02] group-hover:text-black/[0.04] transition-colors select-none pointer-events-none"
+                  aria-hidden="true"
+                >
                   0{i + 1}
                 </span>
 
@@ -90,7 +102,7 @@ const About = () => {
                     {point.description}
                   </p>
                 </div>
-              </div>
+              </article>
             </AnimatedSection>
           ))}
         </div>

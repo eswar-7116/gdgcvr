@@ -31,6 +31,7 @@ export const DoodleCircle = ({ className = "" }: { className?: string }) => (
     viewBox="0 0 80 80"
     fill="none"
     animate={driftAnimation}
+    aria-hidden="true"
   >
     <motion.circle
       cx="40"
@@ -54,6 +55,7 @@ export const DoodleSquiggle = ({ className = "" }: { className?: string }) => (
     viewBox="0 0 120 40"
     fill="none"
     animate={driftAnimation}
+    aria-hidden="true"
   >
     <motion.path
       d="M5 20C15 8 25 32 35 20C45 8 55 32 65 20C75 8 85 32 95 20C105 8 115 32 115 20"
@@ -74,6 +76,7 @@ export const DoodleDots = ({ className = "" }: { className?: string }) => (
     viewBox="0 0 60 60"
     fill="none"
     animate={fadeDriftAnimation}
+    aria-hidden="true"
   >
     <circle cx="10" cy="10" r="3" fill="currentColor" />
     <circle cx="30" cy="10" r="3" fill="currentColor" />
@@ -92,6 +95,7 @@ export const DoodleLine = ({ className = "" }: { className?: string }) => (
     viewBox="0 0 200 4"
     fill="none"
     animate={driftAnimation}
+    aria-hidden="true"
   >
     <motion.line
       x1="0"
@@ -116,6 +120,7 @@ export const DoodleCross = ({ className = "" }: { className?: string }) => (
     viewBox="0 0 40 40"
     fill="none"
     animate={driftAnimation}
+    aria-hidden="true"
   >
     <motion.path
       d="M8 20H32M20 8V32"
@@ -136,6 +141,7 @@ export const DoodleSpark = ({ className = "" }: { className?: string }) => (
     viewBox="0 0 40 40"
     fill="none"
     animate={fadeDriftAnimation}
+    aria-hidden="true"
   >
     <motion.path
       d="M20 4V12M20 28V36M4 20H12M28 20H36M8 8L14 14M26 26L32 32M32 8L26 14M14 26L8 32"

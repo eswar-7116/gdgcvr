@@ -59,7 +59,7 @@ const BlogPost = () => {
                   {post.image ? (
                     <Image
                       src={post.image}
-                      alt={post.title}
+                      alt={`Cover image for ${post.title}`}
                       fill
                       sizes="(max-width: 1024px) 100vw, 33vw"
                       className="object-contain p-4 transition-transform duration-500 hover:scale-105"
@@ -81,7 +81,9 @@ const BlogPost = () => {
                     <p className="text-sm text-muted-foreground">
                       Published on
                     </p>
-                    <p className="font-medium">{post.date}</p>
+                    <p className="font-medium">
+                      <time>{post.date}</time>
+                    </p>
                   </div>
                   <div className="space-y-1">
                     <p className="text-sm text-muted-foreground">Read time</p>
@@ -91,8 +93,7 @@ const BlogPost = () => {
               </AnimatedSection>
             </div>
 
-            {/* Right Column - Content */}
-            <div className="lg:col-span-8">
+            <article className="lg:col-span-8">
               <AnimatedSection delay={0.2}>
                 <h1 className="heading-lg mb-6">{post.title}</h1>
                 <div
@@ -100,7 +101,7 @@ const BlogPost = () => {
                   dangerouslySetInnerHTML={{ __html: post.content }}
                 />
               </AnimatedSection>
-            </div>
+            </article>
           </div>
         </div>
       </section>

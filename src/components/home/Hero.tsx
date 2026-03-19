@@ -9,7 +9,7 @@ const Hero = () => {
   return (
     <section className="relative min-h-[95vh] pt-28 md:pt-32 pb-10 flex justify-center items-center bg-[#fafafa] selection:bg-black selection:text-white px-4 md:px-8 overflow-hidden">
       {/* Background Grid - VISIBLE & TECHNICAL */}
-      <div className="absolute inset-0 pointer-events-none">
+      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         {/* 1. Base Dot Grid (High Contrast) */}
         <div
           className="absolute inset-0 opacity-[0.2]"
@@ -53,7 +53,7 @@ const Hero = () => {
               backgroundSize: "24px 24px",
             }}
           ></div>
-          <div className="absolute top-0 right-0 p-6 md:p-8">
+          <div className="absolute top-0 right-0 p-6 md:p-8" aria-hidden="true">
             <div className="w-12 h-12 rounded-full border border-neutral-200 flex items-center justify-center group-hover:rotate-45 transition-transform duration-500">
               <ArrowRight className="text-neutral-400 group-hover:text-black transition-colors" />
             </div>
@@ -100,15 +100,23 @@ const Hero = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3, duration: 0.8 }}
             className="flex-1 bg-neutral-900 rounded-[2rem] p-6 relative overflow-hidden group min-h-[200px]"
+            aria-labelledby="hero-code-label"
+            role="img"
           >
+            <span id="hero-code-label" className="sr-only">
+              Code snippet illustration showing a future build process
+            </span>
             {/* Traffic Lights */}
-            <div className="flex gap-2 mb-4">
+            <div className="flex gap-2 mb-4" aria-hidden="true">
               <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
               <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
               <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
             </div>
             {/* Code Content */}
-            <div className="font-mono text-xs md:text-sm text-neutral-400 space-y-1">
+            <div
+              className="font-mono text-xs md:text-sm text-neutral-400 space-y-1"
+              aria-hidden="true"
+            >
               <p>
                 <span className="text-purple-400">const</span>{" "}
                 <span className="text-blue-400">future</span> ={" "}
@@ -123,7 +131,10 @@ const Hero = () => {
                 <span className="animate-pulse">_</span>
               </div>
             </div>
-            <div className="absolute bottom-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity">
+            <div
+              className="absolute bottom-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity"
+              aria-hidden="true"
+            >
               <div className="px-3 py-1 bg-white/10 rounded-full text-xs text-white backdrop-blur-md">
                 Start Building
               </div>
@@ -131,11 +142,13 @@ const Hero = () => {
           </motion.div>
 
           {/* 2b. Event Ticker (The "Time" Element) - ACTIVE BLUE */}
-          <motion.div
+          <motion.article
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.4, duration: 0.8 }}
             className="flex-1 bg-google-blue border border-google-blue rounded-[2rem] p-6 relative overflow-hidden group shadow-lg shadow-google-blue/20 min-h-[180px]"
+            role="region"
+            aria-label="Next Event"
           >
             <div className="flex justify-between items-start">
               <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-google-blue shadow-sm">
@@ -146,10 +159,10 @@ const Hero = () => {
               </span>
             </div>
             <div className="mt-2">
-              <h3 className="text-2xl font-bold text-white">
+              <h2 className="text-2xl font-bold text-white">
                 {nextEvent.title}
-              </h3>
-              <p className="text-white/80">{nextEvent.date}</p>
+              </h2>
+              <time className="text-white/80 block">{nextEvent.date}</time>
               <p
                 className="mt-2 text-white/70 text-sm truncate"
                 title={nextEvent.description}
@@ -158,8 +171,11 @@ const Hero = () => {
               </p>
             </div>
             {/* Decorative Big Icon */}
-            <Zap className="absolute -bottom-4 -right-4 w-32 h-32 text-white/10 transform -rotate-12 pointer-events-none" />
-          </motion.div>
+            <Zap
+              className="absolute -bottom-4 -right-4 w-32 h-32 text-white/10 transform -rotate-12 pointer-events-none"
+              aria-hidden="true"
+            />
+          </motion.article>
 
           {/* 2c. Community & Join (Split) */}
           <div className="flex gap-4 md:gap-6 flex-1 min-h-[140px]">
