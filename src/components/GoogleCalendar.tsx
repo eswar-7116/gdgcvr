@@ -9,8 +9,6 @@ const GoogleCalendar: React.FC<GoogleCalendarProps> = ({
   className = "",
   height = 700,
 }) => {
-  // Calendar ID from src/pages/Events.tsx:
-  // 8ff8064280985d5aa1af9c531d31ef89d5b023c62e1bd9322c1bcef2530996ce%40group.calendar.google.com
   const calendarId =
     "8ff8064280985d5aa1af9c531d31ef89d5b023c62e1bd9322c1bcef2530996ce@group.calendar.google.com";
   const encodedId = encodeURIComponent(calendarId);
@@ -29,6 +27,7 @@ const GoogleCalendar: React.FC<GoogleCalendarProps> = ({
         frameBorder="0"
         scrolling="no"
         title="GDG CVR Event Calendar"
+        suppressHydrationWarning
       />
     </div>
   );

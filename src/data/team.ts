@@ -2,13 +2,13 @@ export const teamMembers = [
   {
     name: "Vijaya Mair",
     role: "Dean, Career Development Centre",
-    image: "vijaya_mam.jpg",
+    image: "/vijaya_mam.jpg",
     linkedin: "https://linkedin.com/in/vijayamair/",
   },
   {
     name: "Dr. A. Seetharam Nagesh",
     role: "Professor, Faculty Co-Ordinator",
-    image: "nagesh_sir.webp",
+    image: "/nagesh_sir.webp",
     linkedin: "https://linkedin.com/in/dr-seetharamnagesh-appe-4584281aa/",
   },
   {

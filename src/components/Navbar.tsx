@@ -1,5 +1,9 @@
+"use client";
+
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import Link from "next/link";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -13,7 +17,7 @@ const navLinks = [
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const location = useLocation();
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,18 +30,22 @@ const Navbar = () => {
   return (
     <>
       <nav
-        className={`fixed top-5 left-1/2 -translate-x-1/2 z-50 w-[95%] md:w-[90%] max-w-5xl transition-all duration-300 ${scrolled
+        className={`fixed top-5 left-1/2 -translate-x-1/2 z-50 w-[95%] md:w-[90%] max-w-5xl transition-all duration-300 ${
+          scrolled
             ? "bg-white/95 backdrop-blur-xl border-black/5 shadow-[0_6px_0_0_rgba(0,0,0,0.08)] py-3"
             : "bg-white/80 backdrop-blur-md border-black/5 shadow-[0_4px_0_0_rgba(0,0,0,0.05)] py-4"
-          } border rounded-full px-6 flex items-center justify-between`}
+        } border rounded-full px-6 flex items-center justify-between`}
       >
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2.5 group">
-          <div className="h-10 w-10 flex items-center justify-center">
-            <img
-              src={"/logo.png"}
+        <Link href="/" className="flex items-center gap-2.5 group">
+          <div className="h-10 w-10 flex items-center justify-center relative">
+            <Image
+              src="/logo.png"
               alt="GDG CVR Logo"
-              className="w-full h-full object-contain"
+              fill
+              sizes="40px"
+              priority
+              className="object-contain"
             />
           </div>
           <span className="font-semibold text-foreground tracking-tight text-[1rem]">
@@ -50,11 +58,12 @@ const Navbar = () => {
           {navLinks.map((link) => (
             <Link
               key={link.path}
-              to={link.path}
-              className={`relative px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${location.pathname === link.path
+              href={link.path}
+              className={`relative px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                pathname === link.path
                   ? "bg-white text-foreground shadow-sm"
                   : "text-muted-foreground hover:text-foreground hover:bg-white/50"
-                }`}
+              }`}
             >
               {link.name}
             </Link>
@@ -88,12 +97,13 @@ const Navbar = () => {
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
-                  to={link.path}
+                  href={link.path}
                   onClick={() => setMobileOpen(false)}
-                  className={`flex items-center justify-center w-full px-4 py-3 rounded-xl text-base font-medium transition-all duration-200 ${location.pathname === link.path
+                  className={`flex items-center justify-center w-full px-4 py-3 rounded-xl text-base font-medium transition-all duration-200 ${
+                    pathname === link.path
                       ? "bg-secondary text-foreground shadow-sm"
                       : "text-muted-foreground hover:bg-secondary/40 hover:text-foreground"
-                    }`}
+                  }`}
                 >
                   {link.name}
                 </Link>
