@@ -51,7 +51,7 @@ const Footer = () => {
               </p>
 
               <motion.a
-                href="/"
+                href="https://gdg.community.dev/gdg-on-campus-cvr-college-of-engineering-hyderabad-india/"
                 target="_blank"
                 rel="noreferrer"
                 whileHover={{ scale: 1.05 }}
