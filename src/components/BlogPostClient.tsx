@@ -49,7 +49,8 @@ const CodeBlock = ({ code, language }: { code: string; language: string }) => {
 };
 
 const BlogPostClient = ({ post, content }: BlogPostClientProps) => {
-  const imageCount = useRef(0);
+  const firstImageMatch = content.match(/!\[.*?\]\((.*?)\)/);
+  const firstImageUrl = firstImageMatch ? firstImageMatch[1] : null;
   return (
     <>
       <section className="section-padding relative min-h-screen">
@@ -111,8 +112,7 @@ const BlogPostClient = ({ post, content }: BlogPostClientProps) => {
                     rehypePlugins={[rehypeSlug]}
                     components={{
                       img: ({ src, alt }) => {
-                        const isFirst = imageCount.current === 0;
-                        imageCount.current++;
+                        const isFirst = src === firstImageUrl;
                         return (
                           <span className="block relative w-full aspect-video my-8 rounded-xl overflow-hidden">
                             <Image
@@ -139,6 +139,21 @@ const BlogPostClient = ({ post, content }: BlogPostClientProps) => {
                         <p className="mb-6 leading-relaxed">
                           {children}
                         </p>
+                      ),
+                      ul: ({ children }) => (
+                        <ul className="list-disc ml-6 mb-6 space-y-2 text-muted-foreground">
+                          {children}
+                        </ul>
+                      ),
+                      ol: ({ children }) => (
+                        <ol className="list-decimal ml-6 mb-6 space-y-2 text-muted-foreground">
+                          {children}
+                        </ol>
+                      ),
+                      li: ({ children }) => (
+                        <li className="leading-relaxed">
+                          {children}
+                        </li>
                       ),
                       a: ({ href, children }) => (
                         <a
