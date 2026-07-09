@@ -1,10 +1,10 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Copy, Check } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
@@ -15,6 +15,35 @@ interface BlogPostClientProps {
   post: BlogPost;
   content: string;
 }
+
+const CodeBlock = ({ children }: { children: any }) => {
+  const [isCopied, setIsCopied] = useState(false);
+  const textRef = useRef<HTMLPreElement>(null);
+
+  const handleCopy = () => {
+    if (textRef.current) {
+      const text = textRef.current.innerText;
+      navigator.clipboard.writeText(text);
+      setIsCopied(true);
+      setTimeout(() => setIsCopied(false), 2000);
+    }
+  };
+
+  return (
+    <div className="relative group my-6">
+      <button
+        onClick={handleCopy}
+        className="absolute right-3 top-3 p-2 rounded-lg bg-background/50 hover:bg-background/80 text-muted-foreground hover:text-foreground transition-all opacity-0 group-hover:opacity-100 backdrop-blur-sm border border-border/50"
+        aria-label="Copy code"
+      >
+        {isCopied ? <Check size={16} className="text-green-500" /> : <Copy size={16} />}
+      </button>
+      <pre ref={textRef} className="font-bold bg-muted p-4 rounded-xl overflow-x-auto text-sm m-0">
+        {children}
+      </pre>
+    </div>
+  );
+};
 
 const BlogPostClient = ({ post, content }: BlogPostClientProps) => {
   const imageCount = useRef(0);
@@ -98,11 +127,32 @@ const BlogPostClient = ({ post, content }: BlogPostClientProps) => {
                           {children}
                         </h2>
                       ),
+                      h3: ({ children }) => (
+                        <h3 className="text-xl font-semibold mt-8 mb-3 text-foreground">
+                          {children}
+                        </h3>
+                      ),
                       p: ({ children }) => (
                         <p className="mb-6 leading-relaxed">
                           {children}
                         </p>
                       ),
+                      a: ({ href, children }) => (
+                        <a
+                          href={href}
+                          className="text-google-blue hover:underline font-medium"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {children}
+                        </a>
+                      ),
+                      code: ({ children }) => (
+                        <code className="font-bold bg-muted px-1.5 py-0.5 rounded-md text-sm">
+                          {children}
+                        </code>
+                      ),
+                      pre: ({ children }) => <CodeBlock>{children}</CodeBlock>,
                     }}
                   >
                     {content}
