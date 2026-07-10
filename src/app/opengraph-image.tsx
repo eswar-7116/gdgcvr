@@ -1,5 +1,5 @@
 import { ImageResponse } from "next/og";
-import { nextEvent } from "@/data/events";
+import { latestEvent } from "@/data/events";
 
 export const runtime = "edge";
 export const alt = "GDG on Campus CVR — Where Campus Meets Google";
@@ -12,7 +12,7 @@ const YELLOW = "hsl(45, 100%, 48%)";
 const GREEN = "hsl(145, 83%, 34%)";
 
 export default function Image() {
-  const desc = nextEvent.description.slice(0, 80) + "…";
+  const desc = latestEvent.description.slice(0, 80) + "…";
 
   return new ImageResponse(
     <div
@@ -320,7 +320,7 @@ export default function Image() {
                 lineHeight: 1.2,
               }}
             >
-              {nextEvent.title}
+              {latestEvent.title}
             </span>
             <span
               style={{
@@ -329,7 +329,7 @@ export default function Image() {
                 fontWeight: 500,
               }}
             >
-              {nextEvent.date}
+              {latestEvent.date}
             </span>
             <span
               style={{
