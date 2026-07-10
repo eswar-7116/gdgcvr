@@ -94,27 +94,27 @@ const MarkdownRenderer = ({ content, className = "" }: MarkdownRendererProps) =>
             </h1>
           ),
           h2: ({ children }) => (
-            <h2 className="text-3xl font-bold mt-12 mb-6 text-foreground tracking-tight">
+            <h2 className="text-2xl font-bold mt-8 mb-4 text-foreground tracking-tight border-b border-border/40 pb-2">
               {children}
             </h2>
           ),
           h3: ({ children }) => (
-            <h3 className="text-2xl font-semibold mt-10 mb-4 text-foreground tracking-tight">
+            <h3 className="text-xl font-semibold mt-6 mb-3 text-foreground tracking-tight">
               {children}
             </h3>
           ),
           p: ({ children }) => (
-            <p className="mb-8 leading-relaxed text-[1.125rem] md:text-[1.25rem] text-foreground/90 font-serif">
+            <p className="mb-4 text-base leading-relaxed text-foreground/90">
               {children}
             </p>
           ),
           ul: ({ children }) => (
-            <ul className="list-disc ml-6 mb-8 space-y-3 text-[1.125rem] md:text-[1.25rem] text-foreground/90 font-serif">
+            <ul className="list-disc ml-6 mb-4 space-y-1 text-base leading-relaxed text-foreground/90">
               {children}
             </ul>
           ),
           ol: ({ children }) => (
-            <ol className="list-decimal ml-6 mb-8 space-y-3 text-[1.125rem] md:text-[1.25rem] text-foreground/90 font-serif">
+            <ol className="list-decimal ml-6 mb-4 space-y-1 text-base leading-relaxed text-foreground/90">
               {children}
             </ol>
           ),
@@ -149,7 +149,7 @@ const MarkdownRenderer = ({ content, className = "" }: MarkdownRendererProps) =>
 
             return (
               <code
-                className="font-bold bg-muted/50 px-1.5 py-0.5 rounded-md text-[0.9em]"
+                className="font-mono font-bold bg-muted/50 px-1.5 py-0.5 rounded-md text-[0.9em]"
                 {...props}
               >
                 {children}
