@@ -5,7 +5,7 @@ import InitialLoader from "../components/InitialLoader/InitialLoader";
 import { Providers } from "../components/Providers";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { nextEvent } from "@/data/events";
+import { latestEvent } from "@/data/events";
 import { GoogleAnalytics } from '@next/third-parties/google'
 
 const inter = Inter({
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
   keywords: [
     "GDG on Campus CVR College of Engineering",
     "GDG",
-    nextEvent.title,
+    latestEvent.title,
     "CVR",
     "CVR College of Engineering",
     "GDG Events",

@@ -1,6 +1,8 @@
-export const nextEvent = {
+export const latestEvent = {
   title: "CodeNyx Hackathon",
   date: "March 30-31, 2026",
+  startDate: "2026-03-30",
+  endDate: "2026-03-31",
   description:
     "A 36-hour hackathon organized by GDG on Campus CVR College of Engineering, where student developers, designers, and innovators come together to build, compete, and create.",
 };

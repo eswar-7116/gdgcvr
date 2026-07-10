@@ -1,11 +1,21 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Zap } from "lucide-react";
 import Link from "next/link";
-import { nextEvent } from "@/data/events";
+import { latestEvent } from "@/data/events";
 
 const Hero = () => {
+  const [eventLabel, setEventLabel] = useState("Next Event");
+
+  useEffect(() => {
+    if (latestEvent.startDate) {
+      const isUpcoming = new Date(latestEvent.startDate) >= new Date();
+      setEventLabel(isUpcoming ? "Next Event" : "Latest Event");
+    }
+  }, []);
+
   return (
     <section className="relative min-h-[95vh] pt-28 md:pt-32 pb-10 flex justify-center items-center bg-[#fafafa] selection:bg-black selection:text-white px-4 md:px-8 overflow-hidden">
       {/* Background Grid - VISIBLE & TECHNICAL */}
@@ -148,26 +158,26 @@ const Hero = () => {
             transition={{ delay: 0.4, duration: 0.8 }}
             className="flex-1 bg-google-blue border border-google-blue rounded-[2rem] p-6 relative overflow-hidden group shadow-lg shadow-google-blue/20 min-h-[180px]"
             role="region"
-            aria-label="Next Event"
+            aria-label={eventLabel}
           >
             <div className="flex justify-between items-start">
               <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-google-blue shadow-sm">
                 <Zap size={18} fill="currentColor" />
               </div>
               <span className="text-xs font-bold uppercase tracking-widest text-white/80">
-                Next Event
+                {eventLabel}
               </span>
             </div>
             <div className="mt-2">
               <h2 className="text-2xl font-bold text-white">
-                {nextEvent.title}
+                {latestEvent.title}
               </h2>
-              <time className="text-white/80 block">{nextEvent.date}</time>
+              <time className="text-white/80 block">{latestEvent.date}</time>
               <p
                 className="mt-2 text-white/70 text-sm truncate"
-                title={nextEvent.description}
+                title={latestEvent.description}
               >
-                {nextEvent.description}
+                {latestEvent.description}
               </p>
             </div>
             {/* Decorative Big Icon */}

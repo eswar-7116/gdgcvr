@@ -9,7 +9,6 @@ import {
   DoodleLine,
 } from "@/components/DoodleAccents";
 import Link from "next/link";
-import { BlogTeam } from "@/data/blogData";
 
 interface BlogPostWithExcerpt {
   id: string;
@@ -18,7 +17,7 @@ interface BlogPostWithExcerpt {
   date: string;
   readTime: string;
   topic: string;
-  team: BlogTeam | null;
+  team: string | null;
   color: string;
   excerpt: string;
 }
@@ -42,17 +41,18 @@ const teamColors: Record<string, string> = {
 
 const BlogListClient = ({
   posts,
-  teams,
 }: {
   posts: BlogPostWithExcerpt[];
-  teams: BlogTeam[];
 }) => {
-  const [activeTeam, setActiveTeam] = useState<BlogTeam | "Other" | "All">(
-    "All",
+  const [activeTeam, setActiveTeam] = useState<string>("All");
+
+  // Get unique teams from the posts dynamically
+  const teams = Array.from(
+    new Set(posts.map((p) => p.team).filter((t): t is string => !!t))
   );
 
   // Group blogs into their teams, using "Other" for null teams
-  const availableTeams: (BlogTeam | "Other")[] = [...teams, "Other"];
+  const availableTeams: string[] = [...teams, "Other"];
   
   // Only show teams that actually have posts
   const activeTeams = availableTeams.filter((team) =>
@@ -73,7 +73,7 @@ const BlogListClient = ({
             posts: posts.filter((p) => (p.team || "Other") === team),
           }))
           .filter((g) => g.posts.length > 0)
-      : [{ team: activeTeam as BlogTeam | "Other", posts: filteredPosts }];
+      : [{ team: activeTeam, posts: filteredPosts }];
 
   return (
     <>
