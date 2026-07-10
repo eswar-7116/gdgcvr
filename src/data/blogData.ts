@@ -1,20 +1,3 @@
-export type BlogTeam =
-  | "Web"
-  | "AIML"
-  | "Cyber"
-  | "IoT & Embedded"
-  | "CP"
-  | "Android";
-
-export const blogTeams: BlogTeam[] = [
-  "Web",
-  "AIML",
-  "Cyber",
-  "IoT & Embedded",
-  "CP",
-  "Android",
-];
-
 export interface BlogPost {
   id: string;
   title: string;
@@ -23,7 +6,7 @@ export interface BlogPost {
   date: string;
   readTime: string;
   topic: string;
-  team: BlogTeam | null;
+  team: string | null;
   color: "google-blue" | "google-red" | "google-green" | "google-yellow";
 }
 
@@ -47,7 +30,7 @@ export const blogPosts: BlogPost[] = [
     date: "May 05, 2020",
     readTime: "5 min read",
     topic: "ML",
-    team: null,
+    team: "AI/ML",
     color: "google-blue",
   },
   {
@@ -58,7 +41,7 @@ export const blogPosts: BlogPost[] = [
     date: "May 01, 2020",
     readTime: "8 min read",
     topic: "Deep Learning",
-    team: null,
+    team: "AI/ML",
     color: "google-red",
   },
   // {
