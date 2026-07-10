@@ -31,13 +31,13 @@ const colorLeft: Record<string, string> = {
 };
 
 const teamColors: Record<string, string> = {
-  Web: "bg-google-blue text-white",
-  AIML: "bg-google-red text-white",
-  Cyber: "bg-google-green text-white",
-  "IoT & Embedded": "bg-google-yellow text-black",
-  CP: "bg-google-green text-white",
-  Android: "bg-google-blue text-white",
-  Other: "bg-neutral-800 text-white",
+  Web: "bg-google-blue/10 text-google-blue border-google-blue/20",
+  AIML: "bg-google-red/10 text-google-red border-google-red/20",
+  Cyber: "bg-google-green/10 text-google-green border-google-green/20",
+  "IoT & Embedded": "bg-google-yellow/10 text-google-yellow border-google-yellow/20",
+  CP: "bg-google-green/10 text-google-green border-google-green/20",
+  Android: "bg-google-blue/10 text-google-blue border-google-blue/20",
+  Other: "bg-muted text-muted-foreground border-border",
 };
 
 const BlogListClient = ({
@@ -148,40 +148,54 @@ const BlogListClient = ({
                   </AnimatedSection>
                 )}
 
-                <div className="space-y-0">
+                <div className="space-y-6 mt-6">
                   {group.posts.map((post, i) => (
                     <AnimatedSection key={post.id} delay={0.08 * i}>
                       <Link href={`/blog/${post.id}`}>
                         <article
-                          className={`group py-12 border-b border-border cursor-pointer border-l-2 ${colorLeft[post.color]} pl-10 hover:bg-secondary/30 transition-all duration-300 -mx-10 px-10 rounded-r-lg`}
+                          className={`group relative p-6 md:p-8 rounded-2xl border border-border/50 bg-card/40 hover:bg-card hover:shadow-lift transition-all duration-300 overflow-hidden flex flex-col justify-between`}
                         >
-                          <div className="flex items-center gap-3 mb-4">
-                            <span className="text-xs text-muted-foreground tracking-wide">
-                              {post.date}
-                            </span>
-                            <span className="w-1 h-1 rounded-full bg-muted-foreground/30" />
-                            <span className="text-xs text-muted-foreground tracking-wide">
-                              {post.readTime}
-                            </span>
-                            <span className="w-1 h-1 rounded-full bg-muted-foreground/30" />
-                            <span
-                              className={`text-xs font-semibold px-2.5 py-0.5 rounded-full ${
-                                teamColors[post.team || "Other"]
-                                  ? teamColors[post.team || "Other"] + " opacity-90"
-                                  : "bg-secondary text-foreground"
-                              }`}
-                            >
-                              {post.team || "Other"}
-                            </span>
-                          </div>
-                          <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-4 group-hover:text-google-blue transition-colors duration-200 tracking-[-0.01em]">
-                            {post.title}
-                          </h2>
-                          <p className="text-muted-foreground leading-[1.8] max-w-2xl">
-                            {post.excerpt}
-                          </p>
-                          <div className="mt-5 flex items-center gap-1.5 text-sm font-medium text-google-blue opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-300">
-                            Read more <ArrowRight size={14} />
+                          <div className={`absolute left-0 top-0 bottom-0 w-1.5 ${
+                            post.color === 'google-blue' ? 'bg-google-blue' : 
+                            post.color === 'google-red' ? 'bg-google-red' : 
+                            post.color === 'google-green' ? 'bg-google-green' : 
+                            'bg-google-yellow'
+                          }`} />
+                          
+                          <div className="pl-2">
+                            <div className="flex flex-wrap items-center gap-3 mb-4">
+                              <span
+                                className={`text-xs font-semibold px-3 py-1 rounded-full border ${
+                                  teamColors[post.team || "Other"]
+                                    ? teamColors[post.team || "Other"]
+                                    : "bg-secondary text-foreground"
+                                }`}
+                              >
+                                {post.team || "Other"}
+                              </span>
+                              <span className="w-1 h-1 rounded-full bg-muted-foreground/30" />
+                              <span className="text-xs text-muted-foreground font-medium tracking-wide flex items-center gap-1.5">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                                {post.date}
+                              </span>
+                              <span className="w-1 h-1 rounded-full bg-muted-foreground/30" />
+                              <span className="text-xs text-muted-foreground font-medium tracking-wide flex items-center gap-1.5">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                {post.readTime}
+                              </span>
+                            </div>
+                            
+                            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4 group-hover:text-google-blue transition-colors duration-200 tracking-tight">
+                              {post.title}
+                            </h2>
+                            <p className="text-muted-foreground/90 leading-relaxed max-w-3xl text-[1.05rem]">
+                              {post.excerpt}
+                            </p>
+                            
+                            <div className="mt-6 flex items-center gap-2 text-sm font-bold text-foreground/70 group-hover:text-google-blue transition-colors duration-300">
+                              Read Article 
+                              <ArrowRight size={16} className="transform group-hover:translate-x-1 transition-transform duration-300" />
+                            </div>
                           </div>
                         </article>
                       </Link>
