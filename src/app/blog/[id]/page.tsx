@@ -1,6 +1,27 @@
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { blogPosts } from "@/data/blogData";
+import { getPostContent } from "@/data/blogContent";
 import BlogPostClient from "@/components/BlogPostClient";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+  const post = blogPosts.find((p) => p.id === id);
+
+  if (!post) {
+    return {
+      title: "Post Not Found",
+    };
+  }
+
+  return {
+    title: `GDG CVR - ${post.title} | ${post.author}`,
+  };
+}
 
 export async function generateStaticParams() {
   return blogPosts.map((post) => ({
@@ -20,5 +41,7 @@ export default async function BlogPost({
     return notFound();
   }
 
-  return <BlogPostClient post={post} />;
+  const content = await getPostContent(post.id);
+
+  return <BlogPostClient post={post} content={content} />;
 }
