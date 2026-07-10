@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -28,19 +28,30 @@ const CodeBlock = ({ code, language }: { code: string; language: string }) => {
   };
 
   return (
-    <div className="relative group my-6 rounded-xl overflow-hidden bg-[#1E1E1E]">
+    <div className="relative group my-8 rounded-xl overflow-hidden bg-[#1E1E1E] shadow-2xl border border-white/10">
+      <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 bg-white/5">
+        <div className="flex items-center gap-2">
+          <div className="w-3 h-3 rounded-full bg-red-500/80" />
+          <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
+          <div className="w-3 h-3 rounded-full bg-green-500/80" />
+        </div>
+        <span className="text-xs font-medium text-white/50 lowercase tracking-wider">{language}</span>
+      </div>
+      
       <button
         onClick={handleCopy}
-        className="absolute right-3 top-3 p-2 rounded-lg bg-background/20 hover:bg-background/40 text-muted-foreground hover:text-white transition-all opacity-0 group-hover:opacity-100 backdrop-blur-md border border-white/10 z-10"
+        className="absolute right-4 top-14 p-2 rounded-lg bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-all opacity-0 group-hover:opacity-100 backdrop-blur-md border border-white/10 z-10"
         aria-label="Copy code"
       >
-        {isCopied ? <Check size={16} className="text-green-500" /> : <Copy size={16} />}
+        {isCopied ? <Check size={16} className="text-green-400" /> : <Copy size={16} />}
       </button>
       <SyntaxHighlighter
         language={language}
         style={vscDarkPlus}
         PreTag="div"
-        customStyle={{ margin: 0, padding: "1.5rem 1rem", background: "transparent", fontSize: "0.875rem" }}
+        className="font-mono"
+        codeTagProps={{ className: "font-mono" }}
+        customStyle={{ margin: 0, padding: "1.5rem", background: "transparent", fontSize: "0.9rem", lineHeight: "1.6" }}
       >
         {code}
       </SyntaxHighlighter>
@@ -49,11 +60,29 @@ const CodeBlock = ({ code, language }: { code: string; language: string }) => {
 };
 
 const BlogPostClient = ({ post, content }: BlogPostClientProps) => {
+  const [readingProgress, setReadingProgress] = useState(0);
+
+  useEffect(() => {
+    const updateProgress = () => {
+      const currentProgress = window.scrollY;
+      const scrollHeight = document.body.scrollHeight - window.innerHeight;
+      if (scrollHeight) {
+        setReadingProgress(Number((currentProgress / scrollHeight).toFixed(2)) * 100);
+      }
+    };
+    window.addEventListener("scroll", updateProgress);
+    return () => window.removeEventListener("scroll", updateProgress);
+  }, []);
+
   const firstImageMatch = content.match(/!\[.*?\]\((.*?)\)/);
   const firstImageUrl = firstImageMatch ? firstImageMatch[1] : null;
   return (
     <>
-      <section className="section-padding relative min-h-screen">
+      <div 
+        className="fixed top-0 left-0 h-1.5 bg-google-blue z-50 transition-all duration-150 rounded-r-full" 
+        style={{ width: `${readingProgress}%` }}
+      />
+      <section className="section-padding relative min-h-screen font-manrope">
         <div className="container px-4 md:px-6">
           <div className="max-w-3xl mx-auto">
             <AnimatedSection>
@@ -80,7 +109,18 @@ const BlogPostClient = ({ post, content }: BlogPostClientProps) => {
                     </span>
                   </div>
                   <span className="text-border">•</span>
-                  <span className="font-medium text-foreground">{post.author}</span>
+                  {post.authorLink ? (
+                    <a
+                      href={post.authorLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-medium text-foreground hover:text-google-blue hover:underline transition-colors"
+                    >
+                      {post.author}
+                    </a>
+                  ) : (
+                    <span className="font-medium text-foreground">{post.author}</span>
+                  )}
                   <span className="text-border">•</span>
                   <time>{post.date}</time>
                   <span className="text-border">•</span>
@@ -110,7 +150,7 @@ const BlogPostClient = ({ post, content }: BlogPostClientProps) => {
                         );
                       },
                       h2: ({ children }) => (
-                        <h2 className="text-3xl font-bold mt-12 mb-6 text-foreground tracking-tight">
+                        <h2 className="text-3xl font-bold mt-14 mb-6 text-foreground tracking-tight border-b border-border/40 pb-4">
                           {children}
                         </h2>
                       ),
@@ -120,17 +160,17 @@ const BlogPostClient = ({ post, content }: BlogPostClientProps) => {
                         </h3>
                       ),
                       p: ({ children }) => (
-                        <p className="mb-6 text-[1.125rem] md:text-[1.2rem] leading-[1.8] text-foreground/80">
+                        <p className="mb-8 text-[1.125rem] md:text-[1.2rem] leading-[1.9] text-foreground/90">
                           {children}
                         </p>
                       ),
                       ul: ({ children }) => (
-                        <ul className="list-disc ml-6 mb-6 space-y-2 text-[1.125rem] md:text-[1.2rem] leading-[1.8] text-foreground/80">
+                        <ul className="list-disc ml-6 mb-8 space-y-2 text-[1.125rem] md:text-[1.2rem] leading-[1.9] text-foreground/90">
                           {children}
                         </ul>
                       ),
                       ol: ({ children }) => (
-                        <ol className="list-decimal ml-6 mb-6 space-y-2 text-[1.125rem] md:text-[1.2rem] leading-[1.8] text-foreground/80">
+                        <ol className="list-decimal ml-6 mb-8 space-y-2 text-[1.125rem] md:text-[1.2rem] leading-[1.9] text-foreground/90">
                           {children}
                         </ol>
                       ),
@@ -165,7 +205,7 @@ const BlogPostClient = ({ post, content }: BlogPostClientProps) => {
 
                         return (
                           <code
-                            className="font-bold bg-muted/50 px-1.5 py-0.5 rounded-md text-[0.9em]"
+                            className="font-mono font-bold bg-muted/50 px-1.5 py-0.5 rounded-md text-[0.9em]"
                             {...props}
                           >
                             {children}

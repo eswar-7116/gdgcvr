@@ -13,6 +13,10 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        manrope: ["var(--font-manrope)", "sans-serif"],
+        mono: ["var(--font-jetbrains-mono)", "monospace"],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
