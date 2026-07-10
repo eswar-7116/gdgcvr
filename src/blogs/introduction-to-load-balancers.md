@@ -71,10 +71,9 @@ let idx = 0;
 
 For sending the HTTP request data to a server, we can use the `fetch` function:
 ```javascript
-const resp = await fetch(srv, {
+const response = await fetch(server, {
   method: req.method,
   headers: req.headers,
-  body: req.body,
 });
 ```
 
