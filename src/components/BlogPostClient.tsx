@@ -120,17 +120,17 @@ const BlogPostClient = ({ post, content }: BlogPostClientProps) => {
                         </h3>
                       ),
                       p: ({ children }) => (
-                        <p className="mb-8 leading-relaxed text-[1.125rem] md:text-[1.25rem] text-foreground/90 font-serif">
+                        <p className="mb-6 text-[1.125rem] md:text-[1.2rem] leading-[1.8] text-foreground/80">
                           {children}
                         </p>
                       ),
                       ul: ({ children }) => (
-                        <ul className="list-disc ml-6 mb-8 space-y-3 text-[1.125rem] md:text-[1.25rem] text-foreground/90 font-serif">
+                        <ul className="list-disc ml-6 mb-6 space-y-2 text-[1.125rem] md:text-[1.2rem] leading-[1.8] text-foreground/80">
                           {children}
                         </ul>
                       ),
                       ol: ({ children }) => (
-                        <ol className="list-decimal ml-6 mb-8 space-y-3 text-[1.125rem] md:text-[1.25rem] text-foreground/90 font-serif">
+                        <ol className="list-decimal ml-6 mb-6 space-y-2 text-[1.125rem] md:text-[1.2rem] leading-[1.8] text-foreground/80">
                           {children}
                         </ol>
                       ),
