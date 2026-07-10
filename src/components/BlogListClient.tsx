@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, PenLine } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
 import {
   DoodleCircle,
@@ -45,7 +45,6 @@ const BlogListClient = ({
   posts: BlogPostWithExcerpt[];
 }) => {
   const [activeTeam, setActiveTeam] = useState<string>("All");
-
   // Get unique teams from the posts dynamically
   const teams = Array.from(
     new Set(posts.map((p) => p.team).filter((t): t is string => !!t))
@@ -92,6 +91,13 @@ const BlogListClient = ({
               Blogs are written by our student community to share the technical
               and non technical knowledge.
             </p>
+            <Link
+              href="/blog/request"
+              className="inline-flex items-center gap-2 mt-8 px-6 py-3 rounded-xl bg-foreground text-background text-sm font-medium hover:opacity-90 transition-all shadow-lift hover:shadow-lift-lg"
+            >
+              <PenLine size={16} />
+              Request a Blog
+            </Link>
           </AnimatedSection>
 
           {/* Team Filter Pills */}
