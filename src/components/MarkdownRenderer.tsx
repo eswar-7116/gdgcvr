@@ -19,10 +19,19 @@ const CodeBlock = ({ code, language }: { code: string; language: string }) => {
   };
 
   return (
-    <div className="relative group my-6 rounded-xl overflow-hidden bg-[#1E1E1E]">
+    <div className="relative group my-8 rounded-xl overflow-hidden bg-[#1E1E1E] shadow-2xl border border-white/10">
+      <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 bg-white/5">
+        <div className="flex items-center gap-2">
+          <div className="w-3 h-3 rounded-full bg-red-500/80" />
+          <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
+          <div className="w-3 h-3 rounded-full bg-green-500/80" />
+        </div>
+        <span className="text-xs font-medium text-white/50 lowercase tracking-wider">{language}</span>
+      </div>
+      
       <button
         onClick={handleCopy}
-        className="absolute right-3 top-3 p-2 rounded-lg bg-background/20 hover:bg-background/40 text-muted-foreground hover:text-white transition-all opacity-0 group-hover:opacity-100 backdrop-blur-md border border-white/10 z-10"
+        className="absolute right-4 top-14 p-2 rounded-lg bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-all opacity-0 group-hover:opacity-100 backdrop-blur-md border border-white/10 z-10"
         aria-label="Copy code"
       >
         {isCopied ? <Check size={16} className="text-green-500" /> : <Copy size={16} />}
@@ -31,7 +40,9 @@ const CodeBlock = ({ code, language }: { code: string; language: string }) => {
         language={language}
         style={vscDarkPlus}
         PreTag="div"
-        customStyle={{ margin: 0, padding: "1.5rem 1rem", background: "transparent", fontSize: "0.875rem" }}
+        className="font-mono"
+        codeTagProps={{ className: "font-mono" }}
+        customStyle={{ margin: 0, padding: "1.5rem", background: "transparent", fontSize: "0.9rem", lineHeight: "1.6" }}
       >
         {code}
       </SyntaxHighlighter>
