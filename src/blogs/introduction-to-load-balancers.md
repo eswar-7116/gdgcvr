@@ -1,3 +1,11 @@
+---
+title: Intro LB
+author: Eswar
+date: July 10, 2026
+readTime: "10"
+topic: Cloud
+color: google-green
+---
 Load balancers are a core component of modern web applications. They help distribute incoming traffic across multiple servers, improving scalability, reliability, and performance. In this blog, we'll understand the basic idea behind them by building a simple one using Express.js.
 
 ## What problem are we solving?
