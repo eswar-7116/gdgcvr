@@ -1,6 +1,8 @@
 import { MetadataRoute } from "next";
 import { getPublishedPosts } from "@/lib/notion";
 
+export const revalidate = 86400; // regenerate sitemap at most once per day
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://gdg.cvr.ac.in";
 
